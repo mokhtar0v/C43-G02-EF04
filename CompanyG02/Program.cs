@@ -52,7 +52,7 @@ namespace CompanyG02
 
                 #region Part03
 
-                var emp = (from e in companyDBContext.Employees
+                var emp = (from e in companyDBContext.Employees.Include(e=>e.Department).ThenInclude(d=>d.Employees)
                            where e.Id == 3
                            select e).FirstOrDefault();
 
@@ -63,7 +63,7 @@ namespace CompanyG02
                     Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name ?? "Not Found"}");
                 }
 
-                var dept = (from d in companyDBContext.Departments
+                var dept = (from d in companyDBContext.Departments.Include(d=>d.Employees)
                             where d.DepartmentId == 1
                             select d).FirstOrDefault();
 
@@ -80,6 +80,8 @@ namespace CompanyG02
                 #region Part04
 
                 #endregion
+
+
 
                 CompanyDBContextSeed.Seed(companyDBContext);
                 
