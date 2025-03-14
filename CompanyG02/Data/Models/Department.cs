@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompanyG02.Data.Models
 {
-    internal class Department
+    public  class Department
     {
         public int DepartmentId { get; set; }
         public required string Name { get; set; }
@@ -21,7 +21,7 @@ namespace CompanyG02.Data.Models
 
         [InverseProperty(nameof(Employee.Department))]
         //Navigational Property 
-        public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
+        public virtual ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
         #endregion
 
         #region One To One Relationship (Manage)
@@ -30,7 +30,7 @@ namespace CompanyG02.Data.Models
         [ForeignKey("Manager")]
         public int? ManagerId { get; set; }
         [InverseProperty(nameof(Employee.ManagedDepartment))]
-        public Employee? Manager { get; set; }
+        public virtual Employee? Manager { get; set; }
         #endregion
     }
 }

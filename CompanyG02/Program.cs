@@ -52,36 +52,46 @@ namespace CompanyG02
 
                 #region Part03
 
-                var emp = (from e in companyDBContext.Employees.Include(e=>e.Department).ThenInclude(d=>d.Employees)
-                           where e.Id == 3
-                           select e).FirstOrDefault();
+                //var emp = (from e in companyDBContext.Employees.Include(e=>e.Department).ThenInclude(d=>d.Employees)
+                //           where e.Id == 3
+                //           select e).FirstOrDefault();
 
-                companyDBContext.Entry(emp).Reference(nameof(Employee.Department)).Load();
+                //companyDBContext.Entry(emp).Reference(nameof(Employee.Department)).Load();
 
-                if (emp is not null)
-                {
-                    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name ?? "Not Found"}");
-                }
+                //if (emp is not null)
+                //{
+                //    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name ?? "Not Found"}");
+                //}
 
-                var dept = (from d in companyDBContext.Departments.Include(d=>d.Employees)
-                            where d.DepartmentId == 1
-                            select d).FirstOrDefault();
+                //var dept = (from d in companyDBContext.Departments.Include(d=>d.Employees)
+                //            where d.DepartmentId == 1
+                //            select d).FirstOrDefault();
 
-                if(dept is not null)
-                {
-                    Console.WriteLine($"Department :{dept.DepartmentId}, Name : {dept.Name}");
-                    foreach(var item in dept.Employees)
-                    {
-                        Console.WriteLine($"Employee : {item.Name}");
-                    }
-                }
+                //if(dept is not null)
+                //{
+                //    Console.WriteLine($"Department :{dept.DepartmentId}, Name : {dept.Name}");
+                //    foreach(var item in dept.Employees)
+                //    {
+                //        Console.WriteLine($"Employee : {item.Name}");
+                //    }
+                //}
                 #endregion
 
                 #region Part04
 
                 #endregion
 
+                #region LazyLoading
+                var emp = (from e in companyDBContext.Employees.Include(e => e.Department).ThenInclude(d => d.Employees)
+                           where e.Id == 3
+                           select e).FirstOrDefault();
 
+                if (emp is not null)
+                {
+                    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name ?? "Not Found"}");
+                }
+
+                #endregion
 
                 CompanyDBContextSeed.Seed(companyDBContext);
                 

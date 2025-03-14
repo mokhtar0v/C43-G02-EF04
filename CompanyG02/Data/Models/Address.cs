@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompanyG02.Data.Models
 {
-    internal class Address
+    public class Address
     {
         public int BlockNum { get; set; }
         public string? Street { get; set; }

@@ -17,6 +17,7 @@ namespace CompanyG02.Data
         {
             //optionsBuilder.UseSqlServer("Data Source=. ;Initial Catalog=Company ;Integrated Security =True");//old syntax
             optionsBuilder.UseSqlServer("Server=MOKHTAR04;Database=Company;Integrated Security =True ; TrustServerCertificate=True");//new syntax
+            optionsBuilder.UseLazyLoadingProxies(); //enable lazy loading
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
