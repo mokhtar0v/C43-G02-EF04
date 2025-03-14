@@ -1,5 +1,7 @@
 ﻿using CompanyG02.Data;
-using CompanyG02.Data.Models;
+using CompanyG02.Data.DataSeed;
+
+//using CompanyG02.Data.Models;
 //using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,25 +50,27 @@ namespace CompanyG02
 
                 #region Get And Remove
 
-                var emp = (from e in companyDBContext.Employees
-                           where e.Id == 3
-                           select e).FirstOrDefault();
+                //var emp = (from e in companyDBContext.Employees
+                //           where e.Id == 3
+                //           select e).FirstOrDefault();
 
 
-                if (emp is not null)
-                {
-                    Console.WriteLine(companyDBContext.Entry(emp).State);
-                    Console.WriteLine(emp.Name);
+                //if (emp is not null)
+                //{
+                //    Console.WriteLine(companyDBContext.Entry(emp).State);
+                //    Console.WriteLine(emp.Name);
 
-                    //companyDBContext.Set<Employee>().Remove(emp); // .toTable instead of dbSet
-                    /*companyDBContext.Employees.Remove(emp); *///as Local Sequence 
-                    companyDBContext.Remove(emp);
-                    //companyDBContext.Entry(emp).State = EntityState.Deleted;
-                    //
-                    Console.WriteLine(companyDBContext.Entry(emp).State);
+                //    //companyDBContext.Set<Employee>().Remove(emp); // .toTable instead of dbSet
+                //    /*companyDBContext.Employees.Remove(emp); *///as Local Sequence 
+                //    companyDBContext.Remove(emp);
+                //    //companyDBContext.Entry(emp).State = EntityState.Deleted;
+                //    //
+                //    Console.WriteLine(companyDBContext.Entry(emp).State);
 
-                }
+                //}
                 #endregion
+
+                CompanyDBContextSeed.Seed(companyDBContext);
                 companyDBContext.SaveChanges();
             }
         }
