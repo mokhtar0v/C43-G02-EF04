@@ -1,5 +1,7 @@
 ﻿using CompanyG02.Data;
 using CompanyG02.Data.DataSeed;
+using CompanyG02.Data.Models;
+
 
 //using CompanyG02.Data.Models;
 //using Core.Entities;
@@ -48,17 +50,18 @@ namespace CompanyG02
                 //}
                 #endregion
 
-                #region Get And Remove
+                #region Part03
 
-                //var emp = (from e in companyDBContext.Employees
-                //           where e.Id == 3
-                //           select e).FirstOrDefault();
+                var emp = (from e in companyDBContext.Employees
+                           where e.Id == 3
+                           select e).FirstOrDefault();
 
+                companyDBContext.Entry(emp).Reference(nameof(Employee.Department)).Load();
 
-                //if (emp is not null)
-                //{
-                //    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name??"Not Found"}");
-                //}
+                if (emp is not null)
+                {
+                    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name ?? "Not Found"}");
+                }
 
                 var dept = (from d in companyDBContext.Departments
                             where d.DepartmentId == 1
@@ -72,6 +75,10 @@ namespace CompanyG02
                         Console.WriteLine($"Employee : {item.Name}");
                     }
                 }
+                #endregion
+
+                #region Part04
+
                 #endregion
 
                 CompanyDBContextSeed.Seed(companyDBContext);
