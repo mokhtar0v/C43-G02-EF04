@@ -57,21 +57,26 @@ namespace CompanyG02
 
                 //if (emp is not null)
                 //{
-                //    Console.WriteLine(companyDBContext.Entry(emp).State);
-                //    Console.WriteLine(emp.Name);
-
-                //    //companyDBContext.Set<Employee>().Remove(emp); // .toTable instead of dbSet
-                //    /*companyDBContext.Employees.Remove(emp); *///as Local Sequence 
-                //    companyDBContext.Remove(emp);
-                //    //companyDBContext.Entry(emp).State = EntityState.Deleted;
-                //    //
-                //    Console.WriteLine(companyDBContext.Entry(emp).State);
-
+                //    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name??"Not Found"}");
                 //}
+
+                var dept = (from d in companyDBContext.Departments
+                            where d.DepartmentId == 1
+                            select d).FirstOrDefault();
+
+                if(dept is not null)
+                {
+                    Console.WriteLine($"Department :{dept.DepartmentId}, Name : {dept.Name}");
+                    foreach(var item in dept.Employees)
+                    {
+                        Console.WriteLine($"Employee : {item.Name}");
+                    }
+                }
                 #endregion
 
                 CompanyDBContextSeed.Seed(companyDBContext);
-                companyDBContext.SaveChanges();
+                
+
             }
         }
     }
