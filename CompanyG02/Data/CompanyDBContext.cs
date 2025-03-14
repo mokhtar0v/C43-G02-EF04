@@ -1,6 +1,6 @@
 ﻿using CompanyG02.Data.Configurations;
 using CompanyG02.Data.Models;
-using Core.Entities;
+//using Azure.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,8 @@ namespace CompanyG02.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Data Source=. ;Initial Catalog=Company ;Integrated Security =True");//old syntax
-            optionsBuilder.UseSqlServer("Server=DESKTOP-4M2VPDA\\MSSQLSERVER02;Database=Company;Integrated Security =True ; TrustServerCertificate=True");//new syntax
+            optionsBuilder.UseSqlServer("Server=MOKHTAR04;Database=Company;Integrated Security =True ; TrustServerCertificate=True");//new syntax
+            optionsBuilder.UseLazyLoadingProxies(); //enable lazy loading
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

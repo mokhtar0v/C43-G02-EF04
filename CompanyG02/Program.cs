@@ -1,6 +1,10 @@
 ﻿using CompanyG02.Data;
+using CompanyG02.Data.DataSeed;
 using CompanyG02.Data.Models;
-using Core.Entities;
+
+
+//using CompanyG02.Data.Models;
+//using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyG02
@@ -46,28 +50,52 @@ namespace CompanyG02
                 //}
                 #endregion
 
-                #region Get And Remove
+                #region Part03
 
-                var emp = (from e in companyDBContext.Employees
+                //var emp = (from e in companyDBContext.Employees.Include(e=>e.Department).ThenInclude(d=>d.Employees)
+                //           where e.Id == 3
+                //           select e).FirstOrDefault();
+
+                //companyDBContext.Entry(emp).Reference(nameof(Employee.Department)).Load();
+
+                //if (emp is not null)
+                //{
+                //    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name ?? "Not Found"}");
+                //}
+
+                //var dept = (from d in companyDBContext.Departments.Include(d=>d.Employees)
+                //            where d.DepartmentId == 1
+                //            select d).FirstOrDefault();
+
+                //if(dept is not null)
+                //{
+                //    Console.WriteLine($"Department :{dept.DepartmentId}, Name : {dept.Name}");
+                //    foreach(var item in dept.Employees)
+                //    {
+                //        Console.WriteLine($"Employee : {item.Name}");
+                //    }
+                //}
+                #endregion
+
+                #region Part04
+
+                #endregion
+
+                #region LazyLoading
+                var emp = (from e in companyDBContext.Employees.Include(e => e.Department).ThenInclude(d => d.Employees)
                            where e.Id == 3
                            select e).FirstOrDefault();
 
-
                 if (emp is not null)
                 {
-                    Console.WriteLine(companyDBContext.Entry(emp).State);
-                    Console.WriteLine(emp.Name);
-
-                    //companyDBContext.Set<Employee>().Remove(emp); // .toTable instead of dbSet
-                    /*companyDBContext.Employees.Remove(emp); *///as Local Sequence 
-                    companyDBContext.Remove(emp);
-                    //companyDBContext.Entry(emp).State = EntityState.Deleted;
-                    //
-                    Console.WriteLine(companyDBContext.Entry(emp).State);
-
+                    Console.WriteLine($"Employee: {emp.Name}, Department: {emp.Department?.Name ?? "Not Found"}");
                 }
+
                 #endregion
-                companyDBContext.SaveChanges();
+
+                CompanyDBContextSeed.Seed(companyDBContext);
+                
+
             }
         }
     }

@@ -28,7 +28,7 @@ namespace CompanyG02.Data.Models
 
     //}
 
-    internal class Employee//POCO Class 
+    public  class Employee//POCO Class 
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -56,13 +56,13 @@ namespace CompanyG02.Data.Models
         //public int? DepartmentDepartmentId { get; set; }
         //Navigational Property 
         [InverseProperty(nameof(Models.Department.Employees))]
-        public Department? Department { get; set; } //Work Department
+        public virtual Department? Department { get; set; } //Work Department
         #endregion
 
         #region One To One Relationship (Manage)
 
         [InverseProperty(nameof(Models.Department.Manager))]
-        public Department? ManagedDepartment { get; set; }
+        public virtual Department? ManagedDepartment { get; set; }
         #endregion
 
     }
