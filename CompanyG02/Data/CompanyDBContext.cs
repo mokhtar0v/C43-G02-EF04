@@ -1,6 +1,6 @@
 ﻿using CompanyG02.Data.Configurations;
 using CompanyG02.Data.Models;
-using Core.Entities;
+//using Azure.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

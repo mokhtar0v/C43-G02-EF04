@@ -1,6 +1,6 @@
 ﻿using CompanyG02.Data;
 using CompanyG02.Data.Models;
-using Core.Entities;
+//using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyG02
